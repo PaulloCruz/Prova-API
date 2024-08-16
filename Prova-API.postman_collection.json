@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "bd98ac42-f465-42a0-a431-c8a8668e74de",
+		"name": "Prova-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37199537"
+	},
+	"item": [
+		{
+			"name": "/eventos/palestrantes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"nome\": \"Nome do Palestrante\", \r\n\"expertise\": \"Área de Especialização\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/palestrantes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"palestrantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/eventos/palestrantes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/palestrantes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"palestrantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/eventos/palestrantes Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/criar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"criar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/eventos/criar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Título do Evento\", \r\n  \"data\": \"2024-08-15\",\r\n  \"palestrantesId\": \"1,3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/criar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"criar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/eventos/agenda",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/registrar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/eventos/inscrever",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/inscrever",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"inscrever"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/eventos/inscrever",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"participanteId\": 1, \r\n  \"eventoId\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/eventos/inscrever",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"eventos",
+						"inscrever"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

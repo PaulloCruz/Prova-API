@@ -28,17 +28,34 @@ export const postInscricoes = (request, response) => {
       .json({ message: "A evento Id é um campo obrigatório" });
     return;
   }
-  const insertSQL = /*sql*/ ` INSERT INTO inscricoes (??,?? )
-    VALUES
-    (?,?)`;
-  const insertData = ["participanteId", "eventoId", participanteId, eventoId];
+  const checkSql = /*sql*/ `
+  select * from inscricoes
+  where ?? = ? and
+  ?? = ? 
+  `;
 
-  conn.query(insertSQL, insertData, (err) => {
-    if (err) {
-      console.error(err);
-      response.status(500).json({ message: "erro ao Cadastrar inscrição" });
+  const checkSqlData = ["participanteId", participanteId, "eventoId", eventoId];
+
+  conn.query(checkSql, checkSqlData, (err, data) => {
+    if (data.length > 0) {
+      response.status(409).json({ message: "inscrição já existente" });
       return;
     }
-    response.status(201).json({ message: "inscrição cadastrada com sucesso" });
+
+    const insertSQL = /*sql*/ ` INSERT INTO inscricoes (??,?? )
+    VALUES
+    (?,?)`;
+    const insertData = ["participanteId", "eventoId", participanteId, eventoId];
+
+    conn.query(insertSQL, insertData, (err) => {
+      if (err) {
+        console.error(err);
+        response.status(500).json({ message: "erro ao Cadastrar inscrição" });
+        return;
+      }
+      response
+        .status(201)
+        .json({ message: "inscrição cadastrada com sucesso" });
+    });
   });
 };

@@ -24,19 +24,37 @@ export const postParticipantes = (request, response) => {
     response.status(400).json({ message: "A email é um campo obrigatório" });
     return;
   }
-  const insertSQL = /*sql*/ ` INSERT INTO participantes (??,?? )
-    VALUES
-    (?,?)`;
-  const insertData = ["nome", "email", nome, email];
 
-  conn.query(insertSQL, insertData, (err) => {
-    if (err) {
-      console.error(err);
-      response.status(500).json({ message: "erro ao Cadastrar participante" });
+  const checkSql = /*sql*/ `
+  select * from participantes
+  where ?? = ? and
+  ?? = ? 
+  `;
+
+  const checkSqlData = ["nome", nome, "email", email];
+
+  conn.query(checkSql, checkSqlData, (err, data) => {
+    if (data.length > 0) {
+      response.status(409).json({ message: "Participantes já existente" });
       return;
     }
-    response
-      .status(201)
-      .json({ message: "participante cadastrado com sucesso" });
+
+    const insertSQL = /*sql*/ ` INSERT INTO participantes (??,?? )
+    VALUES
+    (?,?)`;
+    const insertData = ["nome", "email", nome, email];
+
+    conn.query(insertSQL, insertData, (err) => {
+      if (err) {
+        console.error(err);
+        response
+          .status(500)
+          .json({ message: "erro ao Cadastrar participante" });
+        return;
+      }
+      response
+        .status(201)
+        .json({ message: "participante cadastrado com sucesso" });
+    });
   });
 };

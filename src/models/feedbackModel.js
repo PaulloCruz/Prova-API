@@ -1,12 +1,13 @@
-// id,nome, email, senha, imagem(imagem do google)
-// criar, listar, atualizar, listar por id
 import conn from "../config/conn.js";
 
-const tableInscricoes = /*sql*/ `
-    CREATE TABLE IF NOT EXISTS inscricoes(
-        inscricao int auto_increment PRIMARY KEY,
+const tableFeedbacks = /*sql*/ `
+    CREATE TABLE IF NOT EXISTS feedbacks(
+        feedback_id int auto_increment PRIMARY KEY ,
         participanteId INT NOT NULL,
         eventoId INT NOT NULL,
+        nota INT NOT NULL,
+        comentario VARCHAR(255) NOT NULL,
+
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -14,10 +15,11 @@ const tableInscricoes = /*sql*/ `
         FOREIGN KEY (eventoId) REFERENCES eventos(evento_id)
         )
 `;
-conn.query(tableInscricoes, (err) => {
+
+conn.query(tableFeedbacks, (err) => {
   if (err) {
     console.error("Error ao criar a tabela" + err.stack);
     return;
   }
-  console.log("Tabela [inscricoes] criada com sucesso");
+  console.log("Tabela [feedbacks] criada com sucesso");
 });

@@ -28,19 +28,34 @@ export const postPalestrantes = (request, response) => {
       .json({ message: "A expertise é um campo obrigatório" });
     return;
   }
-  const insertSQL = /*sql*/ ` INSERT INTO palestrantes (??,?? )
-    VALUES
-    (?,?)`;
-  const insertData = ["nome", "expertise", nome, expertise];
 
-  conn.query(insertSQL, insertData, (err) => {
-    if (err) {
-      console.error(err);
-      response.status(500).json({ message: "erro ao Cadastrar palestrante" });
+  const checkSql = /*sql*/ `
+  select * from palestrantes
+  where ?? = ? and
+  ?? = ? 
+  `;
+
+  const checkSqlData = ["nome", nome, "expertise", expertise];
+
+  conn.query(checkSql, checkSqlData, (err, data) => {
+    if (data.length > 0) {
+      response.status(400).json({ message: "palestrante já existente" });
       return;
     }
-    response
-      .status(201)
-      .json({ message: "palestrante cadastrado com sucesso" });
+    const insertSQL = /*sql*/ ` INSERT INTO palestrantes (??,?? )
+    VALUES
+    (?,?)`;
+    const insertData = ["nome", "expertise", nome, expertise];
+
+    conn.query(insertSQL, insertData, (err) => {
+      if (err) {
+        console.error(err);
+        response.status(500).json({ message: "erro ao Cadastrar palestrante" });
+        return;
+      }
+      response
+        .status(201)
+        .json({ message: "palestrante cadastrado com sucesso" });
+    });
   });
 };
